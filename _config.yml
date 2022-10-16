@@ -108,3 +108,4 @@ deploy:
   # example, https://github.com/hexojs/hexojs.github.io
   branch: main
   message: 'Auto update with hexo-deploy-git'
+  ignore_hidden: false
