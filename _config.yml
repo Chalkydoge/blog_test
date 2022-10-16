@@ -105,4 +105,6 @@ deploy:
   type: git
   repo: git@github.com:Chalkydoge/Chalkydoge.github.io.git
   # example, https://github.com/hexojs/hexojs.github.io
-  branch: gh-page
+  branch: main
+  message: 'Auto update with hexo-deploy-git'
+  extended_dirs: .github/workflow
