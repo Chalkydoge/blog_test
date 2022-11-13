@@ -1,5 +1,5 @@
 ---
-title: mlp_nn
+title: mlp-nn
 date: 2022-11-06 17:18:47
 tags:
 - 机器学习
@@ -44,7 +44,9 @@ https://www.kaggle.com/competitions/digit-recognizer
 - 数据集参数数量：每一张图片的大小都是28*28，数字范围0-9，总计42000个输入训练样本。
 - 训练样本中数字的具体的分布如下：
 
-![digits](./mlp_nn/digits.png)
+{% asset_img digits.png This is an example image %}
+
+<!-- ![digits](./mlp-nn/digits.png) -->
 
 ## 3.方法介绍
 
@@ -58,7 +60,7 @@ https://www.kaggle.com/competitions/digit-recognizer
 
 - 可以观察到手写数字的大致形状和图片的基本属性
 
-![nums](./mlp_nn/sample_inputs.png)
+![nums](./mlp-nn/sample_inputs.png)
 
 
 ### 3.2算法描述
@@ -67,7 +69,7 @@ https://www.kaggle.com/competitions/digit-recognizer
 
 MLP的结构:
 
-![nn](./mlp_nn/nn.png)
+![nn](./mlp-nn/nn.png)
 
 - 输入层
 - 隐层
@@ -303,11 +305,11 @@ MNIST识别数字的准确率
 (使用sklearn的版本)
 > 关于MNIST数据集, 采用基本的MLPNN训练(MLPClassifier, 100个神经元), 学习到的权重分布图(使用sklearn)
 
-![weights](./mlp_nn/mlp_nn_weights.png)
+![weights](./mlp-nn/mlp-nn_weights.png)
 
 训练的代码:
 
-![sklearn](./mlp_nn/sklearn_mlp.png)
+![sklearn](./mlp-nn/sklearn_mlp.png)
 
 
 可以看到多层感知机模型是如何通过学习权重实现具体的分类, 例如第3行的第3张图片, 可以很明显看出在'1'数字附近的权重大小有所不同(说明MLP学习到了边界的分布)
@@ -380,12 +382,12 @@ def train(model, loss_fn, optimizer, train_loader):
 
 torch的测试:
 
-![acc](./mlp_nn/acc.png)
+![acc](./mlp-nn/acc.png)
 
 可以看到很快网络就收敛, 损失很快收敛到一个较低的水平。
 
 
-![detail1](./mlp_nn/detailed_torch1.png)
+![detail1](./mlp-nn/detailed_torch1.png)
 具体的测试过程中 我们可以看到一个步长(epoch)就使得我们的感知机在训练集上几乎学到了所有特征, 获得了90%以上的准确率
 - 训练集上的准确率$p_{train} = 0.9686$
 
@@ -393,7 +395,7 @@ torch的测试:
 
 - 我们的多层感知机(使用交叉熵损失)在测试集上的准确率$p = 0.97475$ 达到了一个很高的水平
 
-![res1](./mlp_nn/res1.png)
+![res1](./mlp-nn/res1.png)
 
 ---
 
@@ -401,7 +403,7 @@ torch的测试:
 
 - 多标签-软间隔损失的定义
 
-![loss](./mlp_nn/another_loss.png)
+![loss](./mlp-nn/another_loss.png)
 
 - 可以看到实际上类似于交叉熵, 但这里的损失函数, 基于的是最大熵模型
 
@@ -420,17 +422,17 @@ mean_train_losses, mean_valid_losses, valid_acc_list = modified_train(new_model,
 
 训练的过程:
 
-![mlp2](./mlp_nn/mlp2_train.png)
+![mlp2](./mlp-nn/mlp2_train.png)
 
 - 训练的最终准确率$p_{train} = 0.9762$
 
-![mlp2_train](./mlp_nn/res2.png)
+![mlp2_train](./mlp-nn/res2.png)
 
 **最终结果**
 
 - 我们的多层感知机(使用多标签软间隔损失)在测试集上的准确率$p_{test} = 0.97032$ 也达到了一个很高的水平
 
-![res1](./mlp_nn/res3.png)
+![res1](./mlp-nn/res3.png)
 
 
 ## 5.总结 
