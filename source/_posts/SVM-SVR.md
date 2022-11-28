@@ -6,7 +6,9 @@ tags:
 - 机器学习
 mathjax: true
 ---
-replace
+
+{% asset_img svm-svr.jpeg svm_svr %}
+
 <!-- more -->
 
 # SVM/SVR-机器学习实验报告

@@ -5,8 +5,11 @@ tags:
 - 机器学习
 ---
 
+吐血的作业...
+
 <!--more-->
 
+<!-- {% asset_img (url_here) description %} -->
 
 背景:
 todo
@@ -22,11 +25,11 @@ todo
 
 关键点:
 
-1. 特征工程: 去掉一些特别离谱的数据
+1. 特征工程: 提取重要的特征, 重新组成一些新特征&去掉一些特别离谱的数据
 
 2. 模型选择：决策树/随机森林一般不错
 
-3. 正负类差距过大 => imblearn进行适当修正 or down-sampling
+3. 正负类差距过大 => imblearn进行适当修正 或者使用负采样的方式 提升负类比例 down-sampling
 
 ### 特征工程
 
@@ -117,3 +120,34 @@ a_id_1 + a_info_1-7
 可能的改进方案:
 
 - 时间序列数据 在训练+测试集上是有一个明显的先后顺序的!
+
+todo:
+
+1. dt 一项实际上和time有重复! (time包含了当天的小时+分钟+秒等信息)
+
+> apply自定义时间(YY MM DD: hh:mm:ss to 时间戳整数)
+
+将time转为时间戳, 去掉dt(重复了), 序列化week_day(0-1-2-3-4-5-6)表示星期天-星期六即可, hh小时可以不用改
+
+2. 增加特征, 替换time(绝对时间)
+
+time_in_day 表示天内的时间偏移量
+
+cents 表示 交易金额取整之后剩余部分()
+
+> df['time_in_day'] = uni.TransactionDT % 86400
+  df['cents'] = uni.TransactionAmt % 1
+
+3. 使用lgb替代原先使用的XGBoost(实际上可以两种都使用)
+
+4. 借鉴他人的方案
+
+我认为这个或许可以替代手工实现一波特征的生成(引用openfe的feature-generation方法)
+
+> https://github.com/IIIS-Li-Group/OpenFE/blob/master/examples/IEEE-CIS-Fraud-Detection/main.py
+
+或者这个比较传统的方式
+> https://www.kaggle.com/code/jtrotman/ieee-fraud-adversarial-lgb-split-points
+
+- Cached OOF(Out-Of-Fold) 折外预测
+- FAST Cross

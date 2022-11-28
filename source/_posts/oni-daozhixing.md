@@ -1,8 +1,12 @@
 ---
-title: oni-daozhixing
+title: 缺氧游戏记录
 date: 2022-11-24 22:53:06
 tags:
+- 倒置星
+- 缺氧
 ---
+
+倒置星开荒记录...
 
 <!--more -->
 
@@ -20,7 +24,7 @@ tags:
 
 - 储油石+水泉供水产油 => 精炼石油 => 石油发电+塑料生产
 
-![储油石开发模块](./oni-daozhixing/crudeoilstone.jpeg)
+{% asset_img crudeoilstone.jpeg 储油石开发模块 %}
 
 --- 
 
