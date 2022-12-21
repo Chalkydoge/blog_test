@@ -36,7 +36,7 @@ CNN的关键操作
 - 特征提取
 
 filter: 过滤器(滤波器)
-- 大小假设为$W\time H\times D$
+- 大小假设为$W\times H\times D$
 - 计算经过该滤波器卷积后的数据尺寸
 - 滤波器的参数数量(WHD)
 
@@ -143,11 +143,12 @@ $$
 
 全局的感知-对比-卷积结构的感知
 
-$Q = XW^Q$
-$V = XW^V$
+$Q = XW^Q$,
+$V = XW^V$,
 $K = XW^K$
+其中 $W^Q, W^V, W^K$ 都是可以动态变化的参数矩阵
 
-不同类型的相关性
+不同类型之间的attention计算:
 - 2-head的attention(取两个输入同时加和做attention计算)
 
 self-attention机制的问题
@@ -155,9 +156,10 @@ self-attention机制的问题
 解决：引入位置编码 Positonal Encoding
 - 每个位置都有一个独特的位置向量标记 $e^i$
 
-$e^i + a^i$, $a^i = f(q^i, k^i, v^i)$
+最终将扩展的attention-score记作 
+$e^i + a^i$, 其中 $a^i = f(q^i, k^i, v^i)$
 
-CV中Attention机制的应用
+#### CV中Attention机制的应用
 
 以CBAM为例：通道注意力机制
 
@@ -294,7 +296,7 @@ r_i^{(k)} =
 \end{cases}
 $$
 
-- $r_i^(k) = 1 if x_i是第k类 否则为 0$
+- $r_i^{(k)} = 1\ 如果x_i属于第k类,\ 否则为 0$
 - $\mu_k$ 是分为第k类的聚类的原型向量
 
 {% endraw %}
@@ -325,7 +327,7 @@ Kmeans的工作原理就是将$n$个数据点放入$d$维空间的$K$个聚类�
 K-means算法的应用:
 
 - 有损失的数据压缩
-- 存储K个聚类的中心数据, 而不是原始的数据点
+- **存储K个聚类的中心数据, 而不是原始的数据点**(codebook的实际原理)
 - 每一个数据点用K聚类来近似, 从而起到了压缩数据的功能(K << N的情况下)
 
 K-means的问题：
@@ -339,7 +341,7 @@ K-means的问题：
 
 改进2: soft K-means算法
 - 算法有额外的一个参数$\beta$ 标识分布的陡峭程度
-- $\beta$ 是方差的倒数关系, $\sigma = \frac{k}{\sqrt beta }$
+- $\beta$ 是方差的倒数关系, $\sigma = \frac{k}{\sqrt \beta }$
 
 更新$r_i^{(k)}$的算式
 
