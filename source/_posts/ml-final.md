@@ -286,7 +286,7 @@ $$
 J = min \sum_{i=1}^n \sum_{k=1}^K r_i^(k) |x_i - \mu_k|^2 
 $$
 
-{% beginraw %}
+{% raw %}
 
 $$
 r_i^{(k)} = 
