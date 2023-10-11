@@ -250,3 +250,30 @@ external synchrony 外部的同步机制
 后面就是详细解释作者如何实现以上的优化的。
 
 
+两种粒度的可恢复性
+
+Local resiliency
+- local replica of each NF
+- 网络功能副本 通过 cgroup的freezer进行冻结 直到NF Manager唤醒这个NF再启动副本
+- no-replay scheme 的方式进行同步 保证输出的commit只有一个
+- NF不会将响应发送回客户端 直到本地的副本完成复制（由于处于同一个系统上 同步时间很短）
+- 如果出现故障：Manager直接拉起副本 保证了一致性
+
+Remote resiliency：当服务节点不可用
+
+引入外部的同步过程
+- LB节点管理计数器 在每一条发送出去的消息上绑定一个计数器，在缓存区内维护消息的副本
+- packet logger划分到4个不同的队列上去 UL-control, UL-data, DL-control, DL-data
+- 缓存的数据包被重新复制一次状态（在副本程序内）
+
+replica node挑选4个队列中counter之最小的作为重现数据包的开始，从而实现按照顺序进行状态的复制。
+
+- 主节点的本地备份：周期性发送状态的快照给远程的副本
+- 本地和远程都维护一个record用来处理和同步消息
+
+每一个UE的事件触发一次同步 从而可以在故障时完成数据包的恢复，防止重传；
+5GC需要处理大量的控制平面事件，需要大量的event-based checkpointing
+
+Failure detector：探测网络服务是否出现了故障，Seamless-BFD
+
+{% asset_img  5gc_resiliency.png 核心网络的弹性功能实现 %}
