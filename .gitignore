@@ -6,3 +6,5 @@ node_modules/
 public/
 .deploy*/
 _multiconfig.yml
+hexo_deploy_key
+hexo_deploy_key.pub
