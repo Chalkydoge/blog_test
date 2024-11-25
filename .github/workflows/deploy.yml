@@ -5,6 +5,11 @@ on:
     branches:
       - main
 
+env:
+  GIT_USER: chalkydoge
+  GIT_EMAIL: chalkydoge@github.com
+  GIT_DEPLOY_BRANCH: main
+
 jobs:
   build:
     runs-on: ubuntu-20.04
